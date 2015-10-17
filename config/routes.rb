@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   resource 'person'
   get '/people', to: 'people#index'
 
+  resource :friendships
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

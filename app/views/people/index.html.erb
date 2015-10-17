@@ -15,3 +15,22 @@
     </tr>
   <% end %>
 </table>
+
+Add Friend
+<%= form_for :friendships, url: friendships_path(), method: :post do |f| %>
+
+  <p>
+    <%= f.label :person_id %><br>
+    <%= f.text_field :person_id %>
+  </p>
+ 
+  <p>
+    <%= f.label :friend_id %><br>
+    <%= f.text_area :friend_id %>
+  </p>
+ 
+  <p>
+    <%= f.submit %>
+  </p>
+
+<% end %>
