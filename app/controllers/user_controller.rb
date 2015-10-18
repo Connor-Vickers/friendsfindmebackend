@@ -36,6 +36,7 @@ class UserController < ApplicationController
 		  		friend = User.find_by(number: friendnumber.to_i)
 		  		if (friend != nil)
 					shortestFriend = friend
+					shortestFriendnum = nil
 				end
 		  	end
 
@@ -52,7 +53,14 @@ class UserController < ApplicationController
 		  	else
 		  		angle = -1
 		  	end
-		  	return [shortestFriend.number,angle]
+
+		  	if shortestFriend != nil
+		  		number = shortestFriend.number
+		  	else
+		  		number = 0
+		  	end
+
+		  	return [number,angle]
   		end
 
   		def user_params
