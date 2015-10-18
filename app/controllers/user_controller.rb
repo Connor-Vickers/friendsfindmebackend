@@ -4,78 +4,54 @@ class UserController < ApplicationController
   	end
 
   	def get
-  		#if not user make and then save
-  		
-  		user = User.find_by(number: params[:number])
-  		if (user == nil)
-  			user = User.new(user_params)
-  			user.save();
-  		else
-  			user.update(user_params)
-  		end
-
-  		if (params[:friends] != nil)
-  			friends = JSON.parse(params[:friends])
-  		else
-  			friends = []
-  		end
-
-  		ret = {}
-  		for i in (0..friends.length) do
-  			friend = User.find_by(number: friends[i].to_i)
-  			if (friend != nil)
-				ret[friend.number] = [get_dir(user,friend), get_dist(user,friend)]
-			end
-  		end
-  		render json: ret.to_json
+  		render plain: get_angle().round.to_s
   	end
 
   	def get2
-  		#if not user make and then save
-
-  		logger.warn "params"
-  		logger.warn params
-  		
-  		user = User.find_by(number: params[:number])
-  		if (user == nil)
-  			user = User.new(user_params)
-  			user.save();
-  		else
-  			user.update(user_params)
-  		end
-
-  		if (params[:friends] != nil)
-  			friends = JSON.parse(params[:friends])
-  		else
-  			friends = []
-  		end
-
-  		shortestFriend = nil
-  		for friendnumber in friends do
-	  		friend = User.find_by(number: friendnumber.to_i)
-	  		if (friend != nil)
-				shortestFriend = friend
-			end
-	  	end
-
-  		if (friends.length > 0 && shortestFriend != nil)
-	  		shortestDist = get_dist(user,shortestFriend)
-	  		for friendnumber in friends do
-	  			friend = User.find_by(number: friendnumber.to_i)
-	  			if (friend != nil && get_dist(user,friend) < shortestDist)
-					shortestFriend = friend
-				end
-	  		end
-	  		#todo if angle less than certain distance
-	  		angle = get_dir(user,shortestFriend) * (180/(2*3.14159*22.5))
-	  	else
-	  		angle = -1
-	  	end
-	  	angle = 0
-  		render plain: angle.round.to_s
+  		#render plain: (get_angle()/22.5).round.to_s
+  		render plain: 0
   	end
 
   	private
+  		def get_angle
+			user = User.find_by(number: params[:number])
+	  		if (user == nil)
+	  			user = User.new(user_params)
+	  			user.save();
+	  		else
+	  			user.update(user_params)
+	  		end
+
+	  		if (params[:friends] != nil)
+	  			friends = JSON.parse(params[:friends])
+	  		else
+	  			friends = []
+	  		end
+
+	  		shortestFriend = nil
+	  		for friendnumber in friends do
+		  		friend = User.find_by(number: friendnumber.to_i)
+		  		if (friend != nil)
+					shortestFriend = friend
+				end
+		  	end
+
+	  		if (friends.length > 0 && shortestFriend != nil)
+		  		shortestDist = get_dist(user,shortestFriend)
+		  		for friendnumber in friends do
+		  			friend = User.find_by(number: friendnumber.to_i)
+		  			if (friend != nil && get_dist(user,friend) < shortestDist)
+						shortestFriend = friend
+					end
+		  		end
+		  		#todo if angle less than certain distance
+		  		angle = get_dir(user,shortestFriend) * (180/(2*3.14159))
+		  	else
+		  		angle = -1
+		  	end
+		  	return angle
+  		end
+
   		def user_params
     		params.permit(:number, :long, :lat)
   		end
