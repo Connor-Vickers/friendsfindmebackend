@@ -71,7 +71,8 @@ class UserController < ApplicationController
 	  	else
 	  		angle = -1
 	  	end
-  		render plain: "[" + "degrees:" + angle.to_s + "]"
+  		#render plain: "[" + "degrees:" + angle.to_s + "]"
+  		render plain: "Hi Julie"
   	end
 
   	private
