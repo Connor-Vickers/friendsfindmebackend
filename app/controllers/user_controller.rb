@@ -11,7 +11,7 @@ class UserController < ApplicationController
 
   	def get2
   		#render plain: (get_angle()[1]/22.5).round.to_s
-  		render plain: 0
+  		render plain: 4
   	end
 
   	private
