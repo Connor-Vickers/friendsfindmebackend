@@ -50,8 +50,15 @@ class UserController < ApplicationController
   			friends = []
   		end
 
-  		if (friends.length > 0)
-  			shortestFriend = User.find_by(number: friends[0].to_i)
+  		shortestFriend = nil
+  		for friendnumber in friends do
+	  		friend = User.find_by(number: friendnumber.to_i)
+	  		if (friend != nil)
+				shortestFriend = friend
+			end
+	  	end
+
+  		if (friends.length > 0 && shortestFriend != nil)
 	  		shortestDist = get_dist(user,shortestFriend)
 	  		for friendnumber in friends do
 	  			friend = User.find_by(number: friendnumber.to_i)
