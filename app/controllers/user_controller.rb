@@ -18,6 +18,8 @@ class UserController < ApplicationController
   	private
   		def get_angle
 			user = User.find_by(number: params[:number])
+			log.warn "params"
+			log.warn params
 	  		if (user == nil)
 	  			user = User.new(user_params)
 	  			user.save();
@@ -31,14 +33,19 @@ class UserController < ApplicationController
 	  			friends = []
 	  		end
 
+	  		log.warn "friends"
+			log.warn friends
+
 	  		shortestFriend = nil
 	  		for friendnumber in friends do
 		  		friend = User.find_by(number: friendnumber.to_i)
 		  		if (friend != nil)
 					shortestFriend = friend
-					shortestFriendnum = nil
 				end
 		  	end
+
+		  	log.warn "starting friends"
+			log.warn shortestFriend
 
 	  		if (friends.length > 0 && shortestFriend != nil)
 		  		shortestDist = get_dist(user,shortestFriend)
@@ -59,6 +66,11 @@ class UserController < ApplicationController
 		  	else
 		  		number = 0
 		  	end
+
+		  	log.warn "number"
+			log.warn number
+			log.warn "angle"
+			log.warn angle
 
 		  	return [number,angle]
   		end
