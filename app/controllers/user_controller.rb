@@ -20,14 +20,14 @@ class UserController < ApplicationController
   			friends = []
   		end
 
-  		ret = []
+  		ret = {}
   		for i in (0..friends.length) do
   			friend = User.find_by(number: friends[i].to_i)
   			if (friend != nil)
-				ret[i] = [get_dir(user,friend), get_dist(user,friend)]
+				ret[friend.number] = [get_dir(user,friend), get_dist(user,friend)]
 			end
   		end
-  		render json: ret
+  		render json: ret.to_json
   	end
 
   	private
