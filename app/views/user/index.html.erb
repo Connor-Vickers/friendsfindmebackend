@@ -3,16 +3,16 @@
 <table>
   <tr>
     <th>number</th>
-    <th>long</th>
     <th>lat</th>
+    <th>long</th>
     <th>time modified</th>
   </tr>
  
   <% @users.each do |user| %>
     <tr>
       <td><%= user.number %></td>
-      <td><%= user.long %></td>
       <td><%= user.lat %></td>
+      <td><%= user.long %></td>      
       <td><%= user.updated_at %></td>
     </tr>
   <% end %>

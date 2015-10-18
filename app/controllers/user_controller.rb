@@ -67,7 +67,7 @@ class UserController < ApplicationController
 				end
 	  		end
 	  		#todo if angle less than certain distance
-	  		angle = get_dir(user,shortestFriend) * (180/(2*3.14159))
+	  		angle = get_dir(user,shortestFriend) * (180/(2*3.14159*22.5))
 	  	else
 	  		angle = -1
 	  	end
