@@ -4,11 +4,13 @@ class UserController < ApplicationController
   	end
 
   	def get
-  		render plain: get_angle().round.to_s
+  		ret = get_angle()
+  		
+  		render plain: "{\""+ret[0].to_s+"\":"+ret[1].round.to_s+"}"
   	end
 
   	def get2
-  		#render plain: (get_angle()/22.5).round.to_s
+  		#render plain: (get_angle()[1]/22.5).round.to_s
   		render plain: 0
   	end
 
@@ -49,7 +51,7 @@ class UserController < ApplicationController
 		  	else
 		  		angle = -1
 		  	end
-		  	return angle
+		  	return [shortestFriend.number,angle]
   		end
 
   		def user_params
