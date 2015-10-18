@@ -32,6 +32,9 @@ class UserController < ApplicationController
 
   	def get2
   		#if not user make and then save
+
+  		logger.warn "params"
+  		logger.warn params
   		
   		user = User.find_by(number: params[:number])
   		if (user == nil)
