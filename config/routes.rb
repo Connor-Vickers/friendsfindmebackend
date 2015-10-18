@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root 'user#index'
   get '/api', to: 'user#get'
+  get '/api2', to: 'user#get2'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
