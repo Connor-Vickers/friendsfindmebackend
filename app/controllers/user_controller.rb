@@ -10,8 +10,8 @@ class UserController < ApplicationController
   	end
 
   	def get2
-  		render plain: (get_angle()[1]/22.5).round.to_s
-  		#render plain: 4
+  		#render plain: (get_angle()[1]/22.5).round.to_s
+  		render plain: 4
   	end
 
   	private
@@ -55,7 +55,7 @@ class UserController < ApplicationController
   		end
 
   		def user_params
-    		params.require(:number, :long, :lat)
+    		params.permit(:number, :long, :lat)
   		end
 
   		def get_dir(you,them)
