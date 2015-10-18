@@ -55,7 +55,7 @@ class UserController < ApplicationController
   		end
 
   		def user_params
-    		params.permit(:number, :long, :lat)
+    		params.require(:number, :long, :lat)
   		end
 
   		def get_dir(you,them)
