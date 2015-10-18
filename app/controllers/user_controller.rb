@@ -71,6 +71,7 @@ class UserController < ApplicationController
 	  	else
 	  		angle = -1
 	  	end
+	  	angle = 0
   		render plain: angle.round.to_s
   	end
 
